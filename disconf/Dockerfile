@@ -22,4 +22,4 @@ RUN \
     chmod 755 docker-entrypoint.sh \
     && mv docker-entrypoint.sh /usr/local/bin \
     && cd / \
-    && rm -rf /tmp/* \
+    && rm -rf /tmp/*
