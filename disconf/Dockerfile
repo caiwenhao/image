@@ -1,13 +1,6 @@
-FROM 8.0.44-jre8-alpine
-MAINTAINER caiwenhao, 77749770@qq.com
-
+FROM openjdk:8-jre-alpine
 
 VOLUME [ "/data" ]
-# Docker Build Arguments, For further upgrade
-ARG DISCONF_VERSION 2.6.36
-ENV DISCONF_TGZ_URL https://github.com/caiwenhao/disconf/archive/"$DISCONF_VERSION".tar.gz
-ENV ONLINE_CONFIG_PATH /tmp/disconf-"$DISCONF_VERSION"/disconf-web/profile/rd
-ENV WAR_ROOT_PATH /src
 WORKDIR /tmp/
 RUN set -x \
 	&& wget -O src.tar.gz "$DISCONF_TGZ_URL" \
