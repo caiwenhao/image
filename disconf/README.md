@@ -20,4 +20,10 @@ cd disconf-web
 sh deploy/deploy.sh
 ```
 
-3.编写 dockerfile
+3.编译 dockerfile
+
+```shell
+cp /data/tmp/war/disconf-web.war .
+cp -a /data/tmp/war/html .
+docker build . -t reg.lifesense.com/lifesense/disconf:v0.0.0
+```

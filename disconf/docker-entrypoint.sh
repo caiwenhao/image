@@ -1,30 +1,42 @@
 #!/bin/bash
-ORANGE_CONF="/usr/local/orange/conf/orange.conf"
-NGINX_CONF="/usr/local/orange/conf/nginx.conf"
+DISCONF_CONF="/usr/local/tomcat/webapps/ROOT/WEB-INF/classes"
 
-# DNS resolve for nginx and add the internal DNS
-grep nameserver /etc/resolv.conf >/etc/resolv.dnsmasq.conf
-dnsmasq
+if [[ "X${DISCONF_DOAMIN}" != "X" ]]; then
+    sed -i "s/^domain=*$/domain=${DISCONF_DOAMIN}/" ${DISCONF_CONF}/application.properties
 
-# if command starts with option, init mysql
-if [[ "X${ORANGE_DATABASE}" != "X" ]]; then
-    sed -i "s/\"host\": \"127.0.0.1\"/\"host\": \"${ORANGE_HOST}\"/g" ${ORANGE_CONF}
-    sed -i "s/\"port\": \"3306\"/\"port\": \"${ORANGE_PORT}\"/g" ${ORANGE_CONF}
-    sed -i "s/\"database\": \"orange\"/\"database\": \"${ORANGE_DATABASE}\"/g" ${ORANGE_CONF}
-    sed -i "s/\"user\": \"root\"/\"user\": \"${ORANGE_USER}\"/g" ${ORANGE_CONF}
-    sed -i "s/\"password\": \"\"/\"password\": \"${ORANGE_PWD}\"/g" ${ORANGE_CONF}
+fi
+#mail 
+if [[ "X${EMAIL_MONITOR_ON}" != "X" ]]; then
+    sed -i "s/^EMAIL_HOST =*$/EMAIL_HOST =${EMAIL_HOST}/" ${DISCONF_CONF}/application.properties
+    sed -i "s/^EMAIL_HOST_PASSWORD =*$/EMAIL_HOST_PASSWORD =${EMAIL_HOST_PASSWORD}/" ${DISCONF_CONF}/application.properties
+    sed -i "s/^EMAIL_HOST_USER =*$/EMAIL_HOST_USER =${EMAIL_HOST_USER}/" ${DISCONF_CONF}/application.properties
+    sed -i "s/^EMAIL_PORT =*$/EMAIL_PORT =${EMAIL_PORT}/" ${DISCONF_CONF}/application.properties
+    sed -i "s/^DEFAULT_FROM_EMAIL =*$/DEFAULT_FROM_EMAIL =${DEFAULT_FROM_EMAIL}/" ${DISCONF_CONF}/application.properties
+fi
+#mysql
+if [[ "X${DB_HOST}" != "X" ]]; then
+    sed -i "s/127.0.0.1:3306/${DB_HOST}:${DB_PORT}/" ${DISCONF_CONF}/jdbc-mysql.properties
+    sed -i "s/^jdbc.db_0.username=*$/jdbc.db_0.username=${DB_USER}/" ${DISCONF_CONF}/jdbc-mysql.properties
+    sed -i "s/^jdbc.db_0.password=$/jdbc.db_0.password=${DB_PASSWD}/" ${DISCONF_CONF}/jdbc-mysql.properties
 fi
 
-# Nginx conf modify
-grep "www www" ${NGINX_CONF} > /dev/null
-if [ $? -ne 0 ];then
-    sed -i "s/worker_processes  4;/user www www;\nworker_processes  4;\ndaemon  off;/g" ${NGINX_CONF}
+#redis
+if [[ "X${REDIS_HOST1}" != "X" ]]; then
+    sed -i "s/^redis.group1.client1.host=*$/redis.group1.client1.host=${REDIS_HOST1}/" ${DISCONF_CONF}/redis-config.properties
+    sed -i "s/^redis.group1.client1.port=*$/redis.group1.client1.port=${REDIS_PORT1}/" ${DISCONF_CONF}/redis-config.properties
+    sed -i "s/^redis.group1.client1.password=*$/redis.group1.client1.password=${REDIS_PASSWD1}/" ${DISCONF_CONF}/redis-config.properties
 fi
-sed -i "s/resolver 114.114.114.114;/resolver 127.0.0.1 ipv6=off;/g" ${NGINX_CONF}
-sed -i "s/lua_package_path '..\/?.lua;\/usr\/local\/lor\/?.lua;;';/lua_package_path '\/usr\/local\/orange\/?.lua;\/usr\/local\/lor\/?.lua;;';/g" ${NGINX_CONF}
-sed -i "s/listen       80;/listen       8888;/g" ${NGINX_CONF}
+if [[ "X${REDIS_HOST2}" != "X" ]]; then
+    sed -i "s/^redis.group1.client2.host=*$/redis.group1.client2.host=${REDIS_HOST2}/" ${DISCONF_CONF}/redis-config.properties
+    sed -i "s/^redis.group1.client2.port=*$/redis.group1.client2.port=${REDIS_PORT2}/" ${DISCONF_CONF}/redis-config.properties
+    sed -i "s/^redis.group1.client2.password=*$/redis.group1.client2.password=${REDIS_PASSWD2}/" ${DISCONF_CONF}/redis-config.properties
+fi
 
-/usr/local/bin/orange start
+#zook
+if [[ "X${ZOOK_HOSTS}" != "X" ]]; then
+    sed -i "s/^hosts==*$/hosts==${ZOOK_HOSTS}/" ${DISCONF_CONF}/zoo.properties
+fi
 
-# log to docker
-tail -f /usr/local/orange/logs/access.log
+#复制静态资源到共享卷
+/bin/cp -a /tmp/html /data
+exec ${CATALINA_HOME}/bin/catalina.sh run

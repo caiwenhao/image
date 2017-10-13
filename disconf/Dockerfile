@@ -1,12 +1,15 @@
-FROM reg.lifesense.com/library/tomcat:8.0-jdk8-alpine
+FROM reg.lifesense.com/lifesense/tomcat:8.0-jdk8-alpine
 
 VOLUME [ "/data" ]
 EXPOSE 8080
-ADD /data/tmp/war/disconf-web.war /usr/local/tomcat/webapps/ROOT
-ADD /data/tmp/war/html /tmp/html
-ADD docker-entrypoint.sh
+ADD disconf-web.war html /tmp/
+ADD docker-entrypoint.sh /docker-entrypoint.sh
 RUN \
-    chmod 755 docker-entrypoint.sh \
-    && mv docker-entrypoint.sh /usr/local/bin \
+    chmod 755 /docker-entrypoint.sh \
+    && mv /docker-entrypoint.sh /usr/local/bin \
+    && cd /usr/local/tomcat/webapps/ROOT \
+    && rm -rf * \
+    && jar -xvf /tmp/disconf-web.war \
+    && rm -f /tmp/disconf-web.war \
     && cd / 
-ENTRYPOINT ["docker-entrypoint.sh"]
+CMD [ "docker-entrypoint.sh" ]
