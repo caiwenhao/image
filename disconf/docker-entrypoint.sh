@@ -34,7 +34,7 @@ fi
 
 #zook
 if [[ "X${ZOOK_HOSTS}" != "X" ]]; then
-    sed -i "s/^hosts==*$/hosts==${ZOOK_HOSTS}/" ${DISCONF_CONF}/zoo.properties
+    sed -i "s/^hosts=*$/hosts=${ZOOK_HOSTS}/" ${DISCONF_CONF}/zoo.properties
 fi
 
 #复制静态资源到共享卷
