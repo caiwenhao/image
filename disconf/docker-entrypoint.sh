@@ -39,7 +39,7 @@ fi
 
 #复制静态资源到共享卷
 /bin/cp -a /tmp/html /data/
-if [ ! -f "/tmp/conf/application.properties" ]; then  
+if [ -f "/tmp/conf/application.properties" ]; then  
 　　/bin/cp -a /tmp/conf/* ${DISCONF_CONF}/
 fi
 
