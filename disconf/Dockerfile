@@ -1,18 +1,12 @@
-FROM openjdk:8-jre-alpine
+FROM reg.lifesense.com/library/tomcat:8.0-jdk8-alpine
 
 VOLUME [ "/data" ]
-WORKDIR /tmp/
-RUN set -x \
-	&& wget -O src.tar.gz "$DISCONF_TGZ_URL" \
-	&& tar -xvf src.tar.gz --strip-components=1 \
-	&& rm src.tar.gz* \
-    && cp /tmp/disconf-"$DISCONF_VERSION"/disconf-web/profile/rd/application-demo.properties /tmp/disconf-"$DISCONF_VERSION"/disconf-web/profile/rd/application.properties \
-    && cd disconf-"$DISCONF_VERSION"/disconf-web/ \
-    && sh deploy/deploy.sh
-
+EXPOSE 8080
+ADD /data/tmp/war/disconf-web.war /usr/local/tomcat/webapps/ROOT
+ADD /data/tmp/war/html /tmp/html
 ADD docker-entrypoint.sh
 RUN \
     chmod 755 docker-entrypoint.sh \
     && mv docker-entrypoint.sh /usr/local/bin \
-    && cd / \
-    && rm -rf /tmp/*
+    && cd / 
+ENTRYPOINT ["docker-entrypoint.sh"]
