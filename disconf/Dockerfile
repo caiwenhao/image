@@ -1,6 +1,7 @@
 FROM reg.lifesense.com/lifesense/tomcat:8.0-jdk8-alpine
 
 VOLUME [ "/data" ]
+VOLUME [ "/tmp/conf" ]
 EXPOSE 8080
 ADD disconf-web.war /tmp/
 ADD html /tmp/html
