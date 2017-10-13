@@ -2,7 +2,8 @@ FROM reg.lifesense.com/lifesense/tomcat:8.0-jdk8-alpine
 
 VOLUME [ "/data" ]
 EXPOSE 8080
-ADD disconf-web.war html /tmp/
+ADD disconf-web.war /tmp/
+ADD html /tmp/html
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 RUN \
     chmod 755 /docker-entrypoint.sh \

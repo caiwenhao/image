@@ -26,4 +26,5 @@ sh deploy/deploy.sh
 cp /data/tmp/war/disconf-web.war .
 cp -a /data/tmp/war/html .
 docker build . -t reg.lifesense.com/lifesense/disconf:v0.0.0
+docker run -ti reg.lifesense.com/lifesense/disconf:v0.0.0  /bin/bash
 ```

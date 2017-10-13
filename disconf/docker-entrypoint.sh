@@ -38,5 +38,5 @@ if [[ "X${ZOOK_HOSTS}" != "X" ]]; then
 fi
 
 #复制静态资源到共享卷
-/bin/cp -a /tmp/html /data
+/bin/cp -a /tmp/html /data/
 exec ${CATALINA_HOME}/bin/catalina.sh run
