@@ -1,5 +1,5 @@
-NAME=disconf
-VERSION=v0.0.2
+NAME=kafka
+VERSION=v0.0.1
 PROJECT_ID=lifesense
 PROJECT=reg.lifesense.com/${PROJECT_ID}
 
