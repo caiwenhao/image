@@ -1,13 +1,14 @@
+NAME=zookeeper
 VERSION=v2
-PROJECT_ID=google_samples
-PROJECT=gcr.io/${PROJECT_ID}
+PROJECT_ID=lifesense
+PROJECT=reg.lifesense.com/${PROJECT_ID}
 
 all: build
 
 build:
-	docker build --pull -t ${PROJECT}/k8szk:${VERSION} .
+	docker build --pull -t ${PROJECT}/${NAME}:${VERSION} .
 
 push: build
-	gcloud docker -- push ${PROJECT}/k8szk:${VERSION}
+	docker push ${PROJECT}/${NAME}:${VERSION}
 
 .PHONY: all build push
