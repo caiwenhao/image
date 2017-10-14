@@ -1,53 +1,58 @@
-FROM ubuntu:16.04
+FROM openjdk:8-jre-alpine
+MAINTAINER Elisey Zanko <elisey.zanko@gmail.com>
 
-ENV ZK_USER=zookeeper \
-    ZK_DATA_DIR=/var/lib/zookeeper/data \
-    ZK_DATA_LOG_DIR=/var/lib/zookeeper/log \
-    ZK_LOG_DIR=/var/log/zookeeper \
-    JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+# Install required packages
+RUN apk add --no-cache \
+    bash \
+    su-exec
+
+ENV ZOO_USER=zookeeper \
+    ZOO_CONF_DIR=/conf \
+    ZOO_DATA_DIR=/data \
+    ZOO_DATA_LOG_DIR=/datalog \
+    ZOO_PORT=2181 \
+    ZOO_TICK_TIME=2000 \
+    ZOO_INIT_LIMIT=5 \
+    ZOO_SYNC_LIMIT=2 \
+    ZOO_MAX_CLIENT_CNXNS=60
+
+# Add a user and make dirs
+RUN set -ex; \
+    adduser -D "$ZOO_USER"; \
+    mkdir -p "$ZOO_DATA_LOG_DIR" "$ZOO_DATA_DIR" "$ZOO_CONF_DIR"; \
+    chown "$ZOO_USER:$ZOO_USER" "$ZOO_DATA_LOG_DIR" "$ZOO_DATA_DIR" "$ZOO_CONF_DIR"
 
 ARG GPG_KEY=C823E3E5B12AF29C67F81976F5CECB3CB5E9BD2D
-ARG ZK_DIST=zookeeper-3.4.9
+ARG DISTRO_NAME=zookeeper-3.4.10
 
-RUN set -x \
-    && apt-get update \
-    && apt-get install -y openjdk-8-jre-headless wget netcat-openbsd \
-    && wget -q "http://www.apache.org/dist/zookeeper/$ZK_DIST/$ZK_DIST.tar.gz" \
-    && tar -xzf "$ZK_DIST.tar.gz" -C /opt \
-    && rm -r "$ZK_DIST.tar.gz" \
-    && ln -s /opt/$ZK_DIST /opt/zookeeper \
-    && rm -rf /opt/zookeeper/CHANGES.txt \
-    /opt/zookeeper/README.txt \
-    /opt/zookeeper/NOTICE.txt \
-    /opt/zookeeper/CHANGES.txt \
-    /opt/zookeeper/README_packaging.txt \
-    /opt/zookeeper/build.xml \
-    /opt/zookeeper/config \
-    /opt/zookeeper/contrib \
-    /opt/zookeeper/dist-maven \
-    /opt/zookeeper/docs \
-    /opt/zookeeper/ivy.xml \
-    /opt/zookeeper/ivysettings.xml \
-    /opt/zookeeper/recipes \
-    /opt/zookeeper/src \
-    /opt/zookeeper/$ZK_DIST.jar.asc \
-    /opt/zookeeper/$ZK_DIST.jar.md5 \
-    /opt/zookeeper/$ZK_DIST.jar.sha1 \
-    && apt-get autoremove -y wget \
-    && rm -rf /var/lib/apt/lists/*
+# Download Apache Zookeeper, verify its PGP signature, untar and clean up
+RUN set -ex; \
+    apk add --no-cache --virtual .build-deps \
+        gnupg; \
+    wget -q "http://www.apache.org/dist/zookeeper/$DISTRO_NAME/$DISTRO_NAME.tar.gz"; \
+    wget -q "http://www.apache.org/dist/zookeeper/$DISTRO_NAME/$DISTRO_NAME.tar.gz.asc"; \
+    export GNUPGHOME="$(mktemp -d)"; \
+    gpg --keyserver ha.pool.sks-keyservers.net --recv-key "$GPG_KEY" || \
+    gpg --keyserver pgp.mit.edu --recv-keys "$GPG_KEY" || \
+    gpg --keyserver keyserver.pgp.com --recv-keys "$GPG_KEY"; \
+    gpg --batch --verify "$DISTRO_NAME.tar.gz.asc" "$DISTRO_NAME.tar.gz"; \
+    tar -xzf "$DISTRO_NAME.tar.gz"; \
+    mv "$DISTRO_NAME/conf/"* "$ZOO_CONF_DIR"; \
+    rm -rf "$GNUPGHOME" "$DISTRO_NAME.tar.gz" "$DISTRO_NAME.tar.gz.asc"; \
+    apk del .build-deps
+
+WORKDIR $DISTRO_NAME
+VOLUME ["$ZOO_DATA_DIR", "$ZOO_DATA_LOG_DIR"]
+
+EXPOSE $ZOO_PORT 2888 3888
+
+ENV PATH=$PATH:/$DISTRO_NAME/bin \
+    ZOOCFGDIR=$ZOO_CONF_DIR
 
 # Copy configuration generator script to bin
-COPY zkGenConfig.sh zkOk.sh zkMetrics.sh /opt/zookeeper/bin/
+COPY zkGenConfig.sh zkOk.sh zkMetrics.sh /usr/bin/
 
 # Create a user for the zookeeper process and configure file system ownership
 # for necessary directories and symlink the distribution as a user executable
 RUN set -x \
-    && useradd $ZK_USER \
-    && [ `id -u $ZK_USER` -eq 1000 ] \
-    && [ `id -g $ZK_USER` -eq 1000 ] \
-    && mkdir -p $ZK_DATA_DIR $ZK_DATA_LOG_DIR $ZK_LOG_DIR /usr/share/zookeeper /tmp/zookeeper /usr/etc/ \
-    && chown -R "$ZK_USER:$ZK_USER" /opt/$ZK_DIST $ZK_DATA_DIR $ZK_LOG_DIR $ZK_DATA_LOG_DIR /tmp/zookeeper \
-    && ln -s /opt/zookeeper/conf/ /usr/etc/zookeeper \
-    && ln -s /opt/zookeeper/bin/* /usr/bin \
-    && ln -s /opt/zookeeper/$ZK_DIST.jar /usr/share/zookeeper/ \
-    && ln -s /opt/zookeeper/lib/* /usr/share/zookeeper
+    && chown -R "$ZOO_USER:$ZOO_USER"  /usr/bin/zk*

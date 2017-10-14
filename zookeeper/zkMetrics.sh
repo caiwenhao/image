@@ -14,5 +14,5 @@
 # limitations under the License.
 
 
-ZK_CLIENT_PORT=${ZK_CLIENT_PORT:-2181}
-echo mntr | nc localhost $ZK_CLIENT_PORT >& 1
+ZOO_PORT=${ZOO_PORT:-2181}
+echo mntr | nc localhost $ZOO_PORT >& 1
