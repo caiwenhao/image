@@ -10,14 +10,14 @@ ARG KAFKA_DIST=kafka_2.11-0.10.2.0
 RUN set -ex; \
     apk add --no-cache --virtual .build-deps \
         gnupg; \
-	&& wget -q "http://www.apache.org/dist/kafka/$KAFKA_VERSION/$KAFKA_DIST.tgz" \
-    && wget -q "http://www.apache.org/dist/kafka/$KAFKA_VERSION/$KAFKA_DIST.tgz.asc" \
-    && wget -q "http://kafka.apache.org/KEYS" \
-    && export GNUPGHOME="$(mktemp -d)" \
-    && gpg --import KEYS \
-    && gpg --batch --verify "$KAFKA_DIST.tgz.asc" "$KAFKA_DIST.tgz" \
-    && tar -xzf "$KAFKA_DIST.tgz" -C /opt \
-    && rm -r "$GNUPGHOME" "$KAFKA_DIST.tgz" "$KAFKA_DIST.tgz.asc" \
+	wget -q "http://www.apache.org/dist/kafka/$KAFKA_VERSION/$KAFKA_DIST.tgz"; \
+    wget -q "http://www.apache.org/dist/kafka/$KAFKA_VERSION/$KAFKA_DIST.tgz.asc"; \
+    wget -q "http://kafka.apache.org/KEYS"; \
+    export GNUPGHOME="$(mktemp -d)"; \
+    gpg --import KEYS; \
+    gpg --batch --verify "$KAFKA_DIST.tgz.asc" "$KAFKA_DIST.tgz"; \
+    tar -xzf "$KAFKA_DIST.tgz" -C /opt ; \
+    rm -r "$GNUPGHOME" "$KAFKA_DIST.tgz" "$KAFKA_DIST.tgz.asc"; \
     apk del .build-deps
     
 COPY log4j.properties /opt/$KAFKA_DIST/config/
