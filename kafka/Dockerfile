@@ -18,12 +18,12 @@ ARG KAFKA_DIST=kafka_2.11-0.10.2.0
 RUN set -ex; \
     adduser -D "$KAFKA_USER"; \
     mkdir -p "$KAFKA_DATA_DIR" "$KAFKA_HOME" ; \
-    chown "$KAFKA_DATA_DIR" "$KAFKA_HOME"
+    chown -R "$KAFKA_USER:$KAFKA_USER" "$KAFKA_DATA_DIR" "$KAFKA_HOME"
 
 RUN set -ex; \
     apk add --no-cache --virtual .build-deps \
-        gnupg; \
-	wget -q "http://www.apache.org/dist/kafka/$KAFKA_VERSION/$KAFKA_DIST.tgz"; \
+    gnupg; \
+    wget -q "http://www.apache.org/dist/kafka/$KAFKA_VERSION/$KAFKA_DIST.tgz"; \
     wget -q "http://www.apache.org/dist/kafka/$KAFKA_VERSION/$KAFKA_DIST.tgz.asc"; \
     wget -q "http://kafka.apache.org/KEYS"; \
     export GNUPGHOME="$(mktemp -d)"; \
@@ -42,4 +42,3 @@ RUN set -x \
     && mkdir -p $KAFKA_DATA_DIR \
     && chown -R "$KAFKA_USER:$KAFKA_USER"  /opt/$KAFKA_DIST \
     && chown -R "$KAFKA_USER:$KAFKA_USER"  $KAFKA_DATA_DIR
-  
