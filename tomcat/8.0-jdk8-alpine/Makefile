@@ -1,5 +1,5 @@
-NAME=disconf
-VERSION=v0.0.2
+NAME=tomcat
+VERSION=8.0-jdk8-alpine
 PROJECT_ID=lifesense
 PROJECT=reg.lifesense.com/${PROJECT_ID}
 
