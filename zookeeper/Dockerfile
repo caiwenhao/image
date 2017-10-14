@@ -8,8 +8,8 @@ RUN apk add --no-cache \
 
 ENV ZOO_USER=zookeeper \
     ZOO_CONF_DIR=/conf \
-    ZOO_DATA_DIR=/data \
-    ZOO_DATA_LOG_DIR=/datalog \
+    ZOO_DATA_DIR=/var/lib/zookeeper/data \
+    ZOO_DATA_LOG_DIR=/var/lib/zookeeper/log \
     ZOO_CLIENT_PORT=2181 \
     ZOO_SERVER_PORT=2888 \
     ZOO_ELECTION_PORT=3888 \
