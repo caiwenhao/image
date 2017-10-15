@@ -41,4 +41,7 @@ RUN set -x \
     && [ `id -g $KAFKA_USER` -eq 1000 ] \
     && mkdir -p $KAFKA_DATA_DIR \
     && chown -R "$KAFKA_USER:$KAFKA_USER"  /opt/  \
-    && chown -R "$KAFKA_USER:$KAFKA_USER"  $KAFKA_DATA_DIR
+    && chown -R "$KAFKA_USER:$KAFKA_USER"  $KAFKA_DATA_DIR \
+    && cd $KAFKA_HOME
+
+WORKDIR $KAFKA_HOME
