@@ -14,9 +14,6 @@ ENV KAFKA_USER=kafka \
 ARG KAFKA_VERSION=0.10.2.0
 ARG KAFKA_DIST=kafka_2.11-0.10.2.0
 
-
-/opt/kafka_2.11-0.10.2.0
-
 # Add a user and make dirs
 RUN set -ex; \
     adduser -D "$KAFKA_USER"; \
@@ -39,9 +36,9 @@ RUN set -ex; \
 COPY log4j.properties /opt/$KAFKA_DIST/config/
 
 RUN set -x \
-    ln -s /opt/$KAFKA_DIST $KAFKA_HOME \
+    && ln -s /opt/$KAFKA_DIST $KAFKA_HOME \
     && [ `id -u $KAFKA_USER` -eq 1000 ] \
     && [ `id -g $KAFKA_USER` -eq 1000 ] \
     && mkdir -p $KAFKA_DATA_DIR \
-    && chown -R "$KAFKA_USER:$KAFKA_USER"  /opt/$KAFKA_DIST $KAFKA_HOME  \
+    && chown -R "$KAFKA_USER:$KAFKA_USER"  /opt/  \
     && chown -R "$KAFKA_USER:$KAFKA_USER"  $KAFKA_DATA_DIR
