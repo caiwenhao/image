@@ -7,7 +7,6 @@ RUN apk add --no-cache \
 
 ENV KAFKA_USER=kafka \
     KAFKA_DATA_DIR=/var/lib/kafka/data \
-    JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
     KAFKA_HOME=/opt/kafka \
     PATH=$PATH:/opt/kafka/bin
 
@@ -34,6 +33,7 @@ RUN set -ex; \
     apk del .build-deps
     
 COPY log4j.properties /opt/$KAFKA_DIST/config/
+
 
 RUN set -x \
     && ln -s /opt/$KAFKA_DIST $KAFKA_HOME \
