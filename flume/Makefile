@@ -1,5 +1,5 @@
-NAME=zookeeper
-VERSION=v3.4.10
+NAME=flume
+VERSION=v1.6.0
 PROJECT_ID=lifesense
 PROJECT=reg.lifesense.com/${PROJECT_ID}
 
