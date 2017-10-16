@@ -14,8 +14,7 @@ RUN apk add --no-cache \
 
 # Flume download
 RUN set -ex; \
-    apk add --no-cache --virtual .build-deps \
-    gnupg; \
+    apk add --no-cache --virtual .build-deps gnupg && \
     curl -L ${FL_MIRROR}/flume/${FL_VERSION}/apache-flume-${FL_VERSION}-bin.tar.gz -o /tmp/apache-flume-${FL_VERSION}-bin.tar.gz && \ 
     curl -L https://www.apache.org/dist/flume/KEYS -o /tmp/KEYS && \ 
     curl -L https://www.apache.org/dist/flume/${FL_VERSION}/apache-flume-${FL_VERSION}-bin.tar.gz.asc -o /tmp/apache-flume-${FL_VERSION}-bin.tar.gz.asc && \
