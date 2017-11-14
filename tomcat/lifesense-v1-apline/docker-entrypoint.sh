@@ -46,7 +46,7 @@ fi
 
 #听云
 if [[ "${TINGYUN}" == "true" ]]; then
-    JAVA_OPTS="${JAVA_OPTS} -javaagent:/data/apps/tomcat8080/tingyun/tingyun-agent-java.jar"
+    JAVA_OPTS="${JAVA_OPTS} -javaagent:/usr/local/tomcat/tingyun/tingyun-agent-java.jar"
 fi
 
 #日志级别
@@ -56,7 +56,7 @@ fi
 
 #disconf服务器
 if [[ "X${DISCONF_HOST}" != "X" ]]; then
-    JAVA_OPTS="${JAVA_OPTS} -Dconf_server_host=${JVM_LEVEL}"
+    JAVA_OPTS="${JAVA_OPTS} -Dconf_server_host=${DISCONF_HOST}"
 fi
 
 #内存参数
