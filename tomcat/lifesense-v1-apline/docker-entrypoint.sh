@@ -71,7 +71,7 @@ if [[ "X${JVM_Xmn}" != "X" ]]; then
     JAVA_OPTS="${JAVA_OPTS} -Xms${JVM_Xmn}"
 fi
 if [[ "X${JVM_Xss}" != "X" ]]; then
-    JAVA_OPTS="${JAVA_OPTS} -Xms${JVM_Xss}""
+    JAVA_OPTS="${JAVA_OPTS} -Xms${JVM_Xss}"
 fi
 
 #输出汇总JAVA_OPTS
@@ -79,13 +79,13 @@ export JAVA_OPTS="-server -Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8 $J
 
 #tomcat参数
 if [[ "X${TOMCAT_acceptCount}" != "X" ]]; then
-    sed -i 's/acceptCount="1024"/acceptCount="${TOMCAT_acceptCount}"/g' /data/apps/tomcat8080/conf/server.xml
+    sed "/acceptCount/ s/4096/${TOMCAT_acceptCount}/g"  /usr/local/tomcat/conf/server.xml  
 fi
 if [[ "X${TOMCAT_maxThreads}" != "X" ]]; then
-    sed -i 's/maxThreads="512"/maxThreads="${TOMCAT_maxThreads}"/g' /data/apps/tomcat8080/conf/server.xml
+    sed "/maxThreads/ s/512/${TOMCAT_maxThreads}/g"  /usr/local/tomcat/conf/server.xml  
 fi
 if [[ "X${TOMCAT_minSpareThreads}" != "X" ]]; then
-    sed -i 's/minSpareThreads="512"/minSpareThreads="${TOMCAT_minSpareThreads}"/g' /data/apps/tomcat8080/conf/server.xml
+    sed "/minSpareThreads/ s/512/${TOMCAT_minSpareThreads}/g"  /usr/local/tomcat/conf/server.xml  
 fi
 
 exec ${CATALINA_HOME}/bin/catalina.sh run
