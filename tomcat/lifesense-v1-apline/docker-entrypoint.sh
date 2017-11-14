@@ -87,5 +87,3 @@ fi
 if [[ "X${TOMCAT_minSpareThreads}" != "X" ]]; then
     sed "/minSpareThreads/ s/512/${TOMCAT_minSpareThreads}/g"  /usr/local/tomcat/conf/server.xml  
 fi
-
-exec ${CATALINA_HOME}/bin/catalina.sh run
