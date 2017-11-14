@@ -1,4 +1,4 @@
-FROM 8.0-jdk8-alpine
+FROM reg.lifesense.com/lifesense/tomcat:8.0-jdk8-alpine
 LABEL maintainer "caiwenhao <77749770@qq.com>"
 
 ENV TINGYUN="" \
