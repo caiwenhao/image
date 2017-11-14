@@ -18,6 +18,5 @@ ENV TINGYUN="" \
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 COPY server.xml /usr/local/tomcat/conf/server.xml
 
-RUN chmod 755 /docker-entrypoint.sh \
-    && cd / 
-CMD [ "docker-entrypoint.sh" ]
+RUN chmod 755 /docker-entrypoint.sh
+CMD [ "/docker-entrypoint.sh" ]
