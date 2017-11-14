@@ -56,7 +56,6 @@ fi
 
 #disconf服务器
 if [[ "X${DISCONF_HOST}" != "X" ]]; then
-    if [[ "X${DISCONF_HOST}" == "X" ]]; then
     JAVA_OPTS="${JAVA_OPTS} -Dconf_server_host=${JVM_LEVEL}"
 fi
 
@@ -87,5 +86,6 @@ fi
 if [[ "X${TOMCAT_minSpareThreads}" != "X" ]]; then
     sed "/minSpareThreads/ s/512/${TOMCAT_minSpareThreads}/g"  /usr/local/tomcat/conf/server.xml  
 fi
+
 #运行
 exec ${CATALINA_HOME}/bin/catalina.sh run
