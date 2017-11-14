@@ -64,13 +64,13 @@ if [[ "X${JVM_Xms}" != "X" ]]; then
     JAVA_OPTS="${JAVA_OPTS} -Xms${JVM_Xms}"
 fi
 if [[ "X${JVM_Xmx}" != "X" ]]; then
-    JAVA_OPTS="${JAVA_OPTS} -Xms${JVM_Xmx}"
+    JAVA_OPTS="${JAVA_OPTS} -Xmx${JVM_Xmx}"
 fi
 if [[ "X${JVM_Xmn}" != "X" ]]; then
-    JAVA_OPTS="${JAVA_OPTS} -Xms${JVM_Xmn}"
+    JAVA_OPTS="${JAVA_OPTS} -Xmn${JVM_Xmn}"
 fi
 if [[ "X${JVM_Xss}" != "X" ]]; then
-    JAVA_OPTS="${JAVA_OPTS} -Xms${JVM_Xss}"
+    JAVA_OPTS="${JAVA_OPTS} -Xss${JVM_Xss}"
 fi
 
 #输出汇总JAVA_OPTS
