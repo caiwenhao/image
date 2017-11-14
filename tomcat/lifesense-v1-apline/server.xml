@@ -9,13 +9,16 @@
     <Executor name="tomcatThreadPool8080"
               namePrefix="tomcatThreadPool8080-exec-"
               maxThreads="512"
-              minSpareThreads="512"
+              minSpareThreads="30"
+              prestartminSpareThreads = "true"
               maxIdleTime="60000"/>
-    <Connector port="8080" protocol="org.apache.coyote.http11.Http11AprProtocol"
+    <Connector port="8080" protocol="org.apache.coyote.http11.Http11Nio2Protocol"
                connectionTimeout="60000"
                keepAliveTimeout="60000"
+               enableLookups="false"
                maxKeepAliveRequests="384"
                acceptCount="4096"
+               acceptorThreadCount="2"
                server="lx"
                URIEncoding="UTF-8"
                executor="tomcatThreadPool8080" />
