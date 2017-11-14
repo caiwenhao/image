@@ -51,27 +51,27 @@ fi
 
 #日志级别
 if [[ "X${JVM_LEVEL}" != "X" ]]; then
-    JAVA_OPTS="${JAVA_OPTS} -Dlog.level=${{JVM_LEVEL}}"
+    JAVA_OPTS="${JAVA_OPTS} -Dlog.level=${JVM_LEVEL}"
 fi
 
 #disconf服务器
 if [[ "X${DISCONF_HOST}" != "X" ]]; then
     if [[ "X${DISCONF_HOST}" == "X" ]]; then
-    JAVA_OPTS="${JAVA_OPTS} -Dconf_server_host=${{JVM_LEVEL}}"
+    JAVA_OPTS="${JAVA_OPTS} -Dconf_server_host=${JVM_LEVEL}"
 fi
 
 #内存参数
 if [[ "X${JVM_Xms}" != "X" ]]; then
-    JAVA_OPTS="${JAVA_OPTS} -Xms${{JVM_Xms}}"
+    JAVA_OPTS="${JAVA_OPTS} -Xms${JVM_Xms}"
 fi
 if [[ "X${JVM_Xmx}" != "X" ]]; then
-    JAVA_OPTS="${JAVA_OPTS} -Xms${{JVM_Xmx}}"
+    JAVA_OPTS="${JAVA_OPTS} -Xms${JVM_Xmx}"
 fi
 if [[ "X${JVM_Xmn}" != "X" ]]; then
-    JAVA_OPTS="${JAVA_OPTS} -Xms${{JVM_Xmn}}"
+    JAVA_OPTS="${JAVA_OPTS} -Xms${JVM_Xmn}"
 fi
 if [[ "X${JVM_Xss}" != "X" ]]; then
-    JAVA_OPTS="${JAVA_OPTS} -Xms${{JVM_Xss}}"
+    JAVA_OPTS="${JAVA_OPTS} -Xms${JVM_Xss}""
 fi
 
 #输出汇总JAVA_OPTS
