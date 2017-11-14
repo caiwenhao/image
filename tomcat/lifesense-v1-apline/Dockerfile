@@ -19,6 +19,4 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 COPY server.xml /usr/local/tomcat/conf/server.xml
 
 RUN chmod 755 /docker-entrypoint.sh
-
-ENTRYPOINT [ "/docker-entrypoint.sh" ]
-CMD ["catalina.sh", "run"]
+CMD ["/docker-entrypoint.sh"]
