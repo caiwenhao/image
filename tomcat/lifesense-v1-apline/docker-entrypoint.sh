@@ -78,13 +78,13 @@ export JAVA_OPTS="-server -Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8 $J
 
 #tomcat参数
 if [[ "X${TOMCAT_acceptCount}" != "X" ]]; then
-    sed "/acceptCount/ s/4096/${TOMCAT_acceptCount}/g"  /usr/local/tomcat/conf/server.xml  
+    sed -i "/acceptCount/ s/4096/${TOMCAT_acceptCount}/g"  /usr/local/tomcat/conf/server.xml  
 fi
 if [[ "X${TOMCAT_maxThreads}" != "X" ]]; then
-    sed "/maxThreads/ s/512/${TOMCAT_maxThreads}/g"  /usr/local/tomcat/conf/server.xml  
+    sed -i "/maxThreads/ s/512/${TOMCAT_maxThreads}/g"  /usr/local/tomcat/conf/server.xml  
 fi
 if [[ "X${TOMCAT_minSpareThreads}" != "X" ]]; then
-    sed "/minSpareThreads/ s/512/${TOMCAT_minSpareThreads}/g"  /usr/local/tomcat/conf/server.xml  
+    sed -i "/minSpareThreads/ s/512/${TOMCAT_minSpareThreads}/g"  /usr/local/tomcat/conf/server.xml  
 fi
 
 #运行
