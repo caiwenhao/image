@@ -3,7 +3,7 @@ LABEL maintainer "caiwenhao <77749770@qq.com>"
 
 # Install required packages
 RUN apk add --no-cache \
-    python py-pip
+    python py-pip java-snappy-native
 
 ENV TINGYUN="" \
     DISCONF_ENV="" \
