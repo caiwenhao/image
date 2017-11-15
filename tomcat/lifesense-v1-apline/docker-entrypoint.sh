@@ -84,7 +84,7 @@ if [[ "X${TOMCAT_maxThreads}" != "X" ]]; then
     sed -i "/maxThreads/ s/512/${TOMCAT_maxThreads}/g"  /usr/local/tomcat/conf/server.xml  
 fi
 if [[ "X${TOMCAT_minSpareThreads}" != "X" ]]; then
-    sed -i "/minSpareThreads/ s/512/${TOMCAT_minSpareThreads}/g"  /usr/local/tomcat/conf/server.xml  
+    sed -i "/minSpareThreads/ s/30/${TOMCAT_minSpareThreads}/g"  /usr/local/tomcat/conf/server.xml  
 fi
 
 #运行
