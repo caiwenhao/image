@@ -11,6 +11,9 @@
               maxThreads="512"
               minSpareThreads="30"
               prestartminSpareThreads = "true"
+              socket.appReadBufSize="1024" 
+              socket.appWriteBufSize="1024"
+              bufferSize="1024"        
               maxIdleTime="60000"/>
     <Connector port="8080" protocol="org.apache.coyote.http11.Http11Nio2Protocol"
                connectionTimeout="60000"
