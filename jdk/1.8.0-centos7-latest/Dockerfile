@@ -10,7 +10,7 @@ ARG jdk_download_url=${base_url}jdk/${release_major}-${release_minor}/${release_
 ARG jce_policy_download_url=${base_url}jce/8/jce_policy-8.zip
 
 ENV LC_ALL=en_US.UTF-8 \
-    JAVA_HOME=/opt/java
+    JAVA_HOME=/usr/java/jdk${release}
 
 RUN yum -y update && \
     yum -y install curl wget tar zip unzip ca-certificates libgcc libstdc++ tzdata-java zlib
