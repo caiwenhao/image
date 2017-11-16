@@ -10,9 +10,10 @@ ARG jdk_download_url=${base_url}jdk/${release_major}-${release_minor}/${release_
 ARG jce_policy_download_url=${base_url}jce/8/jce_policy-8.zip
 
 ENV LC_ALL=en_US.UTF-8 \
-    JAVA_HOME=/usr/java/jdk${release}
+    JAVA_HOME=/opt/java
 
-RUN yum -y install curl wget tar zip unzip ca-certificates libgcc libstdc++ tzdata-java zlib
+RUN yum -y update && \
+    yum -y install curl wget tar zip unzip ca-certificates libgcc libstdc++ tzdata-java zlib
 
 RUN wget -q -O /tmp/jdk.rpm --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" "$jdk_download_url" \
     && rpm -iv /tmp/jdk.rpm \
