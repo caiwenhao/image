@@ -1,4 +1,4 @@
-NAME=tomcat
+NAME=jdk
 VERSION=8.0-centos-latest
 PROJECT_ID=lifesense
 PROJECT=reg.lifesense.com/${PROJECT_ID}
