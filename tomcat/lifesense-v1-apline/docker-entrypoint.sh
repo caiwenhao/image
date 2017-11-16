@@ -28,6 +28,7 @@ if [ "$DISCONF_ENV" = 'online' ] ; then
         TOMCAT_maxThreads=512
         TOMCAT_minSpareThreads=512      
     fi
+    TINGYUN="true"
 else
     if [[ "X${DISCONF_HOST}" == "X" ]]; then
         DISCONF_HOST="disconf.lifesense.com:80"
