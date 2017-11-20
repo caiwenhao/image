@@ -1,5 +1,5 @@
 NAME=jdk
-VERSION=1.8.0-centos7-latest
+VERSION=1.8.0-centos7
 PROJECT_ID=lifesense
 PROJECT=reg.lifesense.com/${PROJECT_ID}
 
