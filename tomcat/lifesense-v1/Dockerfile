@@ -25,16 +25,27 @@ ENV TINGYUN="" \
 RUN wget http://mirror.bit.edu.cn/apache/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
  tar -xvf apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
  rm apache-tomcat*.tar.gz && \
- mv apache-tomcat* ${CATALINA_HOME} && \
- yum install -y tomcat-native 
+ mv apache-tomcat* ${CATALINA_HOME}
 
-RUN chmod +x ${CATALINA_HOME}/bin/*sh
+
+RUN yum install -y apr-devel openssl-devel
+ENV APR_VERSION 1.6.3
+ENV TC_NATIVE 1.2.14
+RUN wget http://mirror.linux-ia64.org/apache/apr/apr-$APR_VERSION.tar.gz \
+  && tar -zxvf apr-$APR_VERSION.tar.gz \
+  && cd apr-$APR_VERSION \
+  && ./configure \
+  && make \
+  && make install \
+  && cd .. \
+  && rm -rf apr-$APR_VERSION.tar.gz \
+  && rm -rf apr-$APR_VERSION
 
 # Create Tomcat admin user
 ADD create_admin_user.sh $CATALINA_HOME/scripts/create_admin_user.sh
 ADD tomcat.sh $CATALINA_HOME/scripts/tomcat.sh
 ADD server.xml $CATALINA_HOME/conf/server.xml
-RUN chmod +x $CATALINA_HOME/scripts/*.sh
+RUN chmod +x $CATALINA_HOME/scripts/*.sh && chmod +x ${CATALINA_HOME}/bin/*sh
 
 WORKDIR /opt/tomcat
 
