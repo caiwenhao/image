@@ -6,7 +6,7 @@ LABEL maintainer "caiwenhao <77749770@qq.com>"
 ENV CATALINA_HOME /opt/tomcat 
 ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin:$CATALINA_HOME/scripts
 ENV TOMCAT_MAJOR 8
-ENV TOMCAT_VERSION 8.5.20
+ENV TOMCAT_VERSION 8.5.23
 
 ENV TINGYUN="" \
     DISCONF_ENV="" \
@@ -22,7 +22,7 @@ ENV TINGYUN="" \
 	TOMCAT_minSpareThreads="" \
 	JAVA_OPTS=""
 
-RUN wget http://ftp.riken.jp/net/apache/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+RUN wget http://mirror.bit.edu.cn/net/apache/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
  tar -xvf apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
  rm apache-tomcat*.tar.gz && \
  mv apache-tomcat* ${CATALINA_HOME}
