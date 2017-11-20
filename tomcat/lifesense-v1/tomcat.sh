@@ -47,7 +47,7 @@ fi
 
 #听云
 if [[ "${TINGYUN}" == "true" ]]; then
-    JAVA_OPTS="${JAVA_OPTS} -javaagent:/usr/local/tomcat/tingyun/tingyun-agent-java.jar"
+    JAVA_OPTS="${JAVA_OPTS} -javaagent:${CATALINA_HOME}/tingyun/tingyun-agent-java.jar"
 fi
 
 #日志级别
@@ -79,13 +79,13 @@ export JAVA_OPTS="-server -Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8 $J
 
 #tomcat参数
 if [[ "X${TOMCAT_acceptCount}" != "X" ]]; then
-    sed -i "/acceptCount/ s/4096/${TOMCAT_acceptCount}/g"  /usr/local/tomcat/conf/server.xml  
+    sed -i "/acceptCount/ s/4096/${TOMCAT_acceptCount}/g"  ${CATALINA_HOME}/conf/server.xml  
 fi
 if [[ "X${TOMCAT_maxThreads}" != "X" ]]; then
-    sed -i "/maxThreads/ s/512/${TOMCAT_maxThreads}/g"  /usr/local/tomcat/conf/server.xml  
+    sed -i "/maxThreads/ s/512/${TOMCAT_maxThreads}/g"  ${CATALINA_HOME}/conf/server.xml  
 fi
 if [[ "X${TOMCAT_minSpareThreads}" != "X" ]]; then
-    sed -i "/minSpareThreads/ s/30/${TOMCAT_minSpareThreads}/g"  /usr/local/tomcat/conf/server.xml  
+    sed -i "/minSpareThreads/ s/30/${TOMCAT_minSpareThreads}/g"  ${CATALINA_HOME}/conf/server.xml  
 fi
 
 #运行
