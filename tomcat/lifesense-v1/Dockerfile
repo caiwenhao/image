@@ -35,7 +35,8 @@ RUN yum -y install epel-release
 
 # Install yum
 RUN yum -y clean all && \
-	yum -y install tomcat-native
+	yum -y install tomcat-native python-pip && \
+	pip install requests
 
 # Create Tomcat admin user
 ADD create_admin_user.sh $CATALINA_HOME/scripts/create_admin_user.sh
