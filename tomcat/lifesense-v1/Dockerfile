@@ -28,18 +28,12 @@ RUN wget http://mirror.bit.edu.cn/apache/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT
  mv apache-tomcat* ${CATALINA_HOME}
 
 
-RUN yum install -y apr-devel openssl-devel
-ENV APR_VERSION 1.6.3
-ENV TC_NATIVE 1.2.14
-RUN wget http://mirror.linux-ia64.org/apache/apr/apr-$APR_VERSION.tar.gz \
-  && tar -zxvf apr-$APR_VERSION.tar.gz \
-  && cd apr-$APR_VERSION \
-  && ./configure \
-  && make \
-  && make install \
-  && cd .. \
-  && rm -rf apr-$APR_VERSION.tar.gz \
-  && rm -rf apr-$APR_VERSION
+# Add EPEL repositories
+RUN yum -y install epel-release
+
+# Install yum
+RUN yum -y clean all && \
+	yum -y install tomcat-native
 
 # Create Tomcat admin user
 ADD create_admin_user.sh $CATALINA_HOME/scripts/create_admin_user.sh
