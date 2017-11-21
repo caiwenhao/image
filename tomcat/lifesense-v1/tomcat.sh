@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #gc优化
-JAVA_GC="-XX:MetaspaceSize=10m -XX:MaxMetaspaceSize=256m -XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction=0 -XX:SurvivorRatio=1 -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:+UseFastAccessorMethods -XX:CMSInitiatingOccupancyFraction=70 -XX:SoftRefLRUPolicyMSPerMB=0 -XX:+UseParNewGC"
+JAVA_GC="-XX:PermSize=256m -XX:MaxPermSize=512m -XX:SurvivorRatio=10 -XX:MaxTenuringThreshold=15 -XX:NewRatio=2 -XX:+DisableExplicitGC"
 
 #扩展参数
 if [[ "X${JAVA_OPTS}" != "X" ]]; then

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Server port="8000" address="127.0.0.1" shutdown="SHUTDOWN">
+<Server port="-1" shutdown="">
   <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
   <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="off" />
   <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
@@ -27,8 +27,7 @@
                URIEncoding="UTF-8"
                executor="tomcatThreadPool8080" />
     <Engine name="Catalina" defaultHost="localhost">
-      <Host name="localhost"  appBase="webapps"
-            unpackWARs="false" autoDeploy="false">
+      <Host name="localhost"  appBase="webapps" unpackWARs="false" autoDeploy="false">
       </Host>
     </Engine>
   </Service>
