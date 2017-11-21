@@ -41,6 +41,7 @@ RUN yum -y clean all && \
 ADD create_admin_user.sh $CATALINA_HOME/scripts/create_admin_user.sh
 ADD tomcat.sh $CATALINA_HOME/scripts/tomcat.sh
 ADD server.xml $CATALINA_HOME/conf/server.xml
+ADD catalina.properties $CATALINA_HOME/conf/catalina.properties
 RUN chmod +x $CATALINA_HOME/scripts/*.sh && chmod +x ${CATALINA_HOME}/bin/*sh
 
 WORKDIR /opt/tomcat
