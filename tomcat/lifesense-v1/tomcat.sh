@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #gc优化
-JAVA_GC="-XX:PermSize=256m -XX:MaxPermSize=512m -XX:SurvivorRatio=10 -XX:MaxTenuringThreshold=15 -XX:NewRatio=2 -XX:+DisableExplicitGC"
+JAVA_GC="-XX:SurvivorRatio=10 -XX:MaxTenuringThreshold=15 -XX:NewRatio=2 -XX:+DisableExplicitGC"
 
 #扩展参数
 if [[ "X${JAVA_OPTS}" != "X" ]]; then
