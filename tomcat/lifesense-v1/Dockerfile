@@ -44,6 +44,10 @@ ADD server.xml $CATALINA_HOME/conf/server.xml
 ADD catalina.properties $CATALINA_HOME/conf/catalina.properties
 RUN chmod +x $CATALINA_HOME/scripts/*.sh && chmod +x ${CATALINA_HOME}/bin/*sh
 
+# 
+RUN mkdir -p /data/apps/deps/jdk1.8/bin/ && \
+	ln -s $JAVA_HOME/bin/jstack /data/apps/deps/jdk1.8/bin/jstack
+
 WORKDIR /opt/tomcat
 
 EXPOSE 8080
