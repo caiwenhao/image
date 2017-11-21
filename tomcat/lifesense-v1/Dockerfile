@@ -53,4 +53,4 @@ WORKDIR /opt/tomcat
 EXPOSE 8080
 EXPOSE 8009
 
-CMD ["$CATALINA_HOME/scripts/tomcat.sh"]
+CMD ["scripts/tomcat.sh"]
