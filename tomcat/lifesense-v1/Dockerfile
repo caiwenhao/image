@@ -36,6 +36,7 @@ RUN yum -y install epel-release
 # Install yum
 RUN yum -y clean all && \
 	yum -y install tomcat-native python-pip && \
+	pip install --upgrade pip && \
 	pip install requests
 
 # Create Tomcat admin user
