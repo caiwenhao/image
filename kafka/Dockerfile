@@ -10,8 +10,8 @@ ENV KAFKA_USER=kafka \
     KAFKA_HOME=/opt/kafka \
     PATH=$PATH:/opt/kafka/bin
 
-ARG KAFKA_VERSION=0.10.2.0
-ARG KAFKA_DIST=kafka_2.11-0.10.2.0
+ARG KAFKA_VERSION=0.10.2.1
+ARG KAFKA_DIST=kafka_2.11-0.10.2.1
 
 # Add a user and make dirs
 RUN set -ex; \
