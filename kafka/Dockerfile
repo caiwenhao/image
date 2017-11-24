@@ -3,7 +3,8 @@ FROM openjdk:8-jdk-alpine
 # Install required packages
 RUN apk add --no-cache \
     bash \
-    su-exec
+    su-exec \
+    strace
 
 ENV KAFKA_USER=kafka \
     KAFKA_DATA_DIR=/var/lib/kafka/data \
