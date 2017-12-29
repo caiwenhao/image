@@ -1,5 +1,5 @@
 NAME=zookeeper
-VERSION=v3.4.10
+VERSION=v3.4.6
 PROJECT_ID=lifesense
 PROJECT=reg.lifesense.com/${PROJECT_ID}
 

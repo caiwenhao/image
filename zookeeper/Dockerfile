@@ -26,11 +26,12 @@ RUN set -ex; \
     chown "$ZOO_USER:$ZOO_USER" "$ZOO_DATA_LOG_DIR" "$ZOO_DATA_DIR" "$ZOO_CONF_DIR"
 
 ARG GPG_KEY=C823E3E5B12AF29C67F81976F5CECB3CB5E9BD2D
-ARG DISTRO_NAME=zookeeper-3.4.10
+ARG DISTRO_NAME=zookeeper-3.4.6
 
 # Download Apache Zookeeper, verify its PGP signature, untar and clean up
 RUN set -ex; \
     apk add --no-cache --virtual .build-deps gnupg; \
+    wget -q "http://www.apache.org/dist/zookeeper/$DISTRO_NAME/$DISTRO_NAME.tar.gz"; \
     export GNUPGHOME="$(mktemp -d)"; \
     tar -xvf "$DISTRO_NAME.tar.gz"; \
     mv "$DISTRO_NAME/conf/"* "$ZOO_CONF_DIR"; \
