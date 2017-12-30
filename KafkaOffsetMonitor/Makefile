@@ -1,4 +1,4 @@
-NAME=KafkaOffsetMonitor
+NAME=kafkaoffsetmonitor
 VERSION=0.2.1
 PROJECT_ID=lifesense
 PROJECT=reg.lifesense.com/${PROJECT_ID}
