@@ -10,7 +10,7 @@ ARG DISTRO_NAME=0.2.1
 
 # Download Apache Zookeeper, verify its PGP signature, untar and clean up
 RUN set -ex; \
-    wget -q "https://github.com/quantifind/KafkaOffsetMonitor/releases/download/v{DISTRO_NAME}/KafkaOffsetMonitor-assembly-${DISTRO_NAME}.jar"; \
+    wget -q "https://github.com/quantifind/KafkaOffsetMonitor/releases/download/v${DISTRO_NAME}/KafkaOffsetMonitor-assembly-${DISTRO_NAME}.jar"; \
     mkdir -p /opt/ ; \
     mv KafkaOffsetMonitor-assembly-${DISTRO_NAME}.jar /opt/
 
