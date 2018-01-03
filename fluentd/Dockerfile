@@ -8,7 +8,8 @@ ENV PATH /home/fluent/.gem/ruby/2.3.0/bin:$PATH
 # cutomize following "gem install fluent-plugin-..." line as you wish
 
 USER root
-RUN apk --no-cache --update add sudo build-base ruby-dev && \
+RUN set -ex; \
+    apk --no-cache --update add sudo build-base ruby-dev && \
     sudo -u fluent gem install fluent-plugin-kubernetes_metadata_filter fluent-plugin-elasticsearch fluent-plugin-elasticsearch-timestamp-check && \
     rm -rf /home/fluent/.gem/ruby/2.3.0/cache/*.gem && sudo -u fluent gem sources -c && \
     apk del sudo build-base ruby-dev && rm -rf /var/cache/apk/*
