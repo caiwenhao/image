@@ -1,5 +1,5 @@
 NAME=fluentd
-VERSION=1.3
+VERSION=1.6
 PROJECT_ID=lifesense
 PROJECT=reg.lifesense.com/${PROJECT_ID}
 
