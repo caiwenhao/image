@@ -17,6 +17,7 @@ RUN set -ex \
     && gem install fluent-plugin-elasticsearch \
     && gem install fluent-plugin-kubernetes_metadata_filter \
     && gem install fluent-plugin-elasticsearch-timestamp-check \
+    && gem install fluent-plugin-gelf-hs \
     && apk del .build-deps \
     #&& gem sources --clear-all \
     && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
