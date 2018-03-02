@@ -1,5 +1,5 @@
 NAME=kibana
-VERSION=5.6.8_v1
+VERSION=5.6.8_v2
 PROJECT_ID=lifesense
 PROJECT=reg.lifesense.com/${PROJECT_ID}
 

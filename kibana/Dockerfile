@@ -66,6 +66,7 @@ RUN set -x \
 ENV PATH /usr/share/kibana/bin:$PATH
 
 COPY docker-entrypoint.sh /
+RUN chmod 777 /docker-entrypoint.sh
 
 EXPOSE 5601
 ENTRYPOINT ["/docker-entrypoint.sh"]
