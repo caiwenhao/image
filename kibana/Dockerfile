@@ -53,6 +53,7 @@ ENV KIBANA_VERSION 5.6.8
 RUN set -x \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends kibana=$KIBANA_VERSION \
+	&& kibana-plugin install x-pack \
 	&& rm -rf /var/lib/apt/lists/* \
 	\
 # the default "server.host" is "localhost" in 5+
