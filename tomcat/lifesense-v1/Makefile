@@ -1,5 +1,5 @@
 NAME=tomcat
-VERSION=lifesense-v1
+VERSION=lifesense-v1_01
 PROJECT_ID=lifesense
 PROJECT=reg.lifesense.com/${PROJECT_ID}
 
