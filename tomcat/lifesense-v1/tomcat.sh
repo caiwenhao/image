@@ -75,7 +75,7 @@ if [[ "X${JVM_Xss}" != "X" ]]; then
 fi
 
 #输出汇总JAVA_OPTS
-export JAVA_OPTS="-server -Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8 $JAVA_OPTS $JAVA_GC"
+export JAVA_OPTS="-server -Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8 -Dops.hostname=$HOSTNAME $JAVA_OPTS $JAVA_GC"
 
 #tomcat参数
 if [[ "X${TOMCAT_acceptCount}" != "X" ]]; then
