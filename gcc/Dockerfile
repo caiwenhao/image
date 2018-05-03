@@ -1,7 +1,7 @@
 FROM reg.lifesense.com/lifesense/jdk:1.8.0-centos7
 MAINTAINER caiwenhao
 
-RUN yum install wget tar bzip2 gcc-c++ -y
+RUN yum install wget tar bzip2 gcc-c++ -y make
 RUN cd /tmp && wget http://ftp.gnu.org/gnu/gcc/gcc-4.8.0/gcc-4.8.0.tar.bz2 \
     && tar xf gcc-4.8.0.tar.bz2 && cd gcc-4.8.0 && ./contrib/download_prerequisites \
     && cd .. && mkdir gcc-build-4.8.0 \
