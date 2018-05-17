@@ -49,7 +49,7 @@ fi
 if [[ "${TINGYUN}" == "true" ]]; then
     JAVA_OPTS="${JAVA_OPTS} -javaagent:${CATALINA_HOME}/tingyun/tingyun-agent-java.jar"
     app_name=$(hostname|awk -F- '{print $1"-"$3}')
-    sed -i 's/Java Application/${app_name}/' /opt/tomcat/tingyun/tingyun.properties
+    sed -i "s/Java Application/${app_name}/" /opt/tomcat/tingyun/tingyun.properties
 fi
 
 #日志级别
