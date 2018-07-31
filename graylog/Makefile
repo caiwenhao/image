@@ -1,6 +1,6 @@
 NAME=graylog
 VERSION=2.4.6-1_v1
-PROJECT_ID=graylog
+PROJECT_ID=lifesense
 PROJECT=reg.lifesense.com/${PROJECT_ID}
 
 all: build
