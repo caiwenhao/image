@@ -1,4 +1,4 @@
-NAME=kibana
+NAME=logstash
 VERSION=5.6.10_v1
 PROJECT_ID=logstash
 PROJECT=reg.lifesense.com/${PROJECT_ID}
