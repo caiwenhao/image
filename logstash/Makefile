@@ -1,0 +1,14 @@
+NAME=kibana
+VERSION=5.6.10_v1
+PROJECT_ID=logstash
+PROJECT=reg.lifesense.com/${PROJECT_ID}
+
+all: build
+
+build:
+	docker build --pull -t ${PROJECT}/${NAME}:${VERSION} .
+
+push: build
+	docker push ${PROJECT}/${NAME}:${VERSION}
+
+.PHONY: all build push
