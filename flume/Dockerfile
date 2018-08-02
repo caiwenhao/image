@@ -36,11 +36,11 @@ RUN set -ex; \
     adduser -D "$FLUME_USER" && \
     chown -R "$FLUME_USER:$FLUME_USER" /opt/
 
-ADD flume.conf $FLUME_HOME/flume.conf
+ADD flume.conf $FLUME_HOME/conf/flume.conf
 
 EXPOSE 41414
 
 WORKDIR $FLUME_HOME 
 
 ENTRYPOINT ["bin/flume-ng", "agent"]
-CMD ["-n", "agent", "-c", "conf", "-f", "flume.conf", "-Dflume.root.logger=INFO,console"]
+CMD ["-n", "agent", "-c", "conf", "-f", "conf/flume.conf", "-Dflume.root.logger=INFO,console"]
