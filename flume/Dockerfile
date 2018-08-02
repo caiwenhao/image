@@ -38,7 +38,7 @@ RUN set -ex; \
 
 ADD flume.conf $FLUME_HOME/flume.conf
 
-EXPOSE 1234
+EXPOSE 41414
 
 WORKDIR $FLUME_HOME 
 
