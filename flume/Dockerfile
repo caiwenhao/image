@@ -42,5 +42,4 @@ EXPOSE 41414
 
 WORKDIR $FLUME_HOME 
 
-ENTRYPOINT ["bin/flume-ng", "agent"]
-CMD ["-n", "agent", "-c", "/opt/flume/conf", "-f", "flume.conf", "-Dflume.root.logger=INFO,console"]
+CMD ["bin/flume-ng","agent","-n", "agent", "-c", "/opt/flume/conf", "-f", "flume.conf", "-Dflume.root.logger=INFO,console"]
