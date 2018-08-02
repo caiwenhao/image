@@ -1,5 +1,5 @@
 NAME=flume
-VERSION=v1.8.0_v1
+VERSION=v1.8.0_v2
 PROJECT_ID=lifesense
 PROJECT=reg.lifesense.com/${PROJECT_ID}
 
