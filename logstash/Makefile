@@ -1,5 +1,5 @@
 NAME=logstash
-VERSION=5.6.10_v1
+VERSION=5.6.10_v2
 PROJECT_ID=logstash
 PROJECT=reg.lifesense.com/${PROJECT_ID}
 
