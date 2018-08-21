@@ -1,5 +1,5 @@
 NAME=gateway-app
-VERSION=0.0.1
+VERSION=0.0.2
 PROJECT_ID=lifesense
 PROJECT=reg.lifesense.com/${PROJECT_ID}
 
