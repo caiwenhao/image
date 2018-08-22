@@ -1,5 +1,5 @@
 NAME=graylog
-VERSION=2.4.6-1_v1
+VERSION=2.4.6-1_v2
 PROJECT_ID=lifesense
 PROJECT=reg.lifesense.com/${PROJECT_ID}
 
