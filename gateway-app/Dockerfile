@@ -18,7 +18,7 @@ WORKDIR /opt/gateway-app
 EXPOSE 80
 EXPOSE 8000
 
-RUN RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' >/etc/timezone
 
 CMD ["start.sh"]
