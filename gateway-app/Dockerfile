@@ -9,7 +9,7 @@ RUN opm install sumory/lor \
 
 
 ADD ./gateway-app.tar.gz /opt/
-RUN chmod +x /opt/gateway-app/run.sh \
+RUN chmod +x /opt/gateway-app/start.sh \
     && mkdir -p /opt/gateway-app/logs
 
 ENV LANG en_US.UTF-8
@@ -21,4 +21,4 @@ EXPOSE 8000
 RUN RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' >/etc/timezone
 
-CMD ["run.sh"]
+CMD ["start.sh"]
